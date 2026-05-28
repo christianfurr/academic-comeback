@@ -1,0 +1,527 @@
+{
+  "/Users/christianfurr/Code/calcu/middleware.ts": {
+    "mtime": 1779762474.9251497,
+    "ast_hash": "1a6708e64b483bd0bcee5687ee009200",
+    "semantic_hash": "1a6708e64b483bd0bcee5687ee009200"
+  },
+  "/Users/christianfurr/Code/calcu/skills-lock.json": {
+    "mtime": 1779763194.505875,
+    "ast_hash": "e9d7d7e1fcf4aa187bcb78cbe3e40306",
+    "semantic_hash": "e9d7d7e1fcf4aa187bcb78cbe3e40306"
+  },
+  "/Users/christianfurr/Code/calcu/postcss.config.mjs": {
+    "mtime": 1779761634.5883706,
+    "ast_hash": "239f3ebf717465dc636818a1a619398d",
+    "semantic_hash": "239f3ebf717465dc636818a1a619398d"
+  },
+  "/Users/christianfurr/Code/calcu/package.json": {
+    "mtime": 1779984781.5832746,
+    "ast_hash": "00bf4361090d5e5d62a9e40e08b9a9b0",
+    "semantic_hash": "00bf4361090d5e5d62a9e40e08b9a9b0"
+  },
+  "/Users/christianfurr/Code/calcu/tsconfig.json": {
+    "mtime": 1779762463.3025684,
+    "ast_hash": "1c1ab7d45507a4cbc9335bd89971acfb",
+    "semantic_hash": "1c1ab7d45507a4cbc9335bd89971acfb"
+  },
+  "/Users/christianfurr/Code/calcu/eslint.config.mjs": {
+    "mtime": 1779762392.012979,
+    "ast_hash": "434e516919b74ccf6638aab9fdf95336",
+    "semantic_hash": "434e516919b74ccf6638aab9fdf95336"
+  },
+  "/Users/christianfurr/Code/calcu/next.config.ts": {
+    "mtime": 1779761634.5861812,
+    "ast_hash": "9b77af189a21a7a64e4bd7a426f64176",
+    "semantic_hash": "9b77af189a21a7a64e4bd7a426f64176"
+  },
+  "/Users/christianfurr/Code/calcu/convex/schema.ts": {
+    "mtime": 1779985069.912015,
+    "ast_hash": "665ea350f5a1a6acd2ce91e31c7bb896",
+    "semantic_hash": "665ea350f5a1a6acd2ce91e31c7bb896"
+  },
+  "/Users/christianfurr/Code/calcu/convex/auth.config.ts": {
+    "mtime": 1779762354.4355552,
+    "ast_hash": "b5fb8b088a154e41c61c1c3a61ee9471",
+    "semantic_hash": "b5fb8b088a154e41c61c1c3a61ee9471"
+  },
+  "/Users/christianfurr/Code/calcu/convex/plannerStates.ts": {
+    "mtime": 1779763388.275946,
+    "ast_hash": "13f44c04272071377946163764585475",
+    "semantic_hash": "13f44c04272071377946163764585475"
+  },
+  "/Users/christianfurr/Code/calcu/convex/tsconfig.json": {
+    "mtime": 1779763190.406267,
+    "ast_hash": "b4aff9f76abb56464900e5b3ab6b4c87",
+    "semantic_hash": "b4aff9f76abb56464900e5b3ab6b4c87"
+  },
+  "/Users/christianfurr/Code/calcu/convex/_generated/dataModel.d.ts": {
+    "mtime": 1779763195.400967,
+    "ast_hash": "af87bff09394971f8debeb5b8e9f8a70",
+    "semantic_hash": "af87bff09394971f8debeb5b8e9f8a70"
+  },
+  "/Users/christianfurr/Code/calcu/convex/_generated/api.d.ts": {
+    "mtime": 1779763227.7682462,
+    "ast_hash": "f77b14760f5cbdd6f82a9bdc9b348805",
+    "semantic_hash": "f77b14760f5cbdd6f82a9bdc9b348805"
+  },
+  "/Users/christianfurr/Code/calcu/convex/_generated/server.d.ts": {
+    "mtime": 1779763227.7577415,
+    "ast_hash": "a6d3e29e1cd98c6a0ebcf82d5074009e",
+    "semantic_hash": "a6d3e29e1cd98c6a0ebcf82d5074009e"
+  },
+  "/Users/christianfurr/Code/calcu/convex/_generated/server.js": {
+    "mtime": 1779763227.7480915,
+    "ast_hash": "cfc7a4ed084119abac0e51d79f525f4f",
+    "semantic_hash": "cfc7a4ed084119abac0e51d79f525f4f"
+  },
+  "/Users/christianfurr/Code/calcu/convex/_generated/api.js": {
+    "mtime": 1779763195.4344347,
+    "ast_hash": "ea14005171d3e17b1b28a7139ad36d62",
+    "semantic_hash": "ea14005171d3e17b1b28a7139ad36d62"
+  },
+  "/Users/christianfurr/Code/calcu/convex/_generated/ai/ai-files.state.json": {
+    "mtime": 1779763194.8075278,
+    "ast_hash": "bcf0bb8223f568556098e61472248351",
+    "semantic_hash": "bcf0bb8223f568556098e61472248351"
+  },
+  "/Users/christianfurr/Code/calcu/src/app/layout.tsx": {
+    "mtime": 1779843619.5050662,
+    "ast_hash": "db59e0b37a691508e261416bbe50d81c",
+    "semantic_hash": "db59e0b37a691508e261416bbe50d81c"
+  },
+  "/Users/christianfurr/Code/calcu/src/app/page.tsx": {
+    "mtime": 1779985821.904109,
+    "ast_hash": "fcbed0a733d5a4debe905fea9f39cc48",
+    "semantic_hash": "fcbed0a733d5a4debe905fea9f39cc48"
+  },
+  "/Users/christianfurr/Code/calcu/src/app/sign-up/[[...sign-up]]/page.tsx": {
+    "mtime": 1779762208.6295438,
+    "ast_hash": "d7c088d6ae9b8cc8918d7bb1402754de",
+    "semantic_hash": "d7c088d6ae9b8cc8918d7bb1402754de"
+  },
+  "/Users/christianfurr/Code/calcu/src/app/sign-in/[[...sign-in]]/page.tsx": {
+    "mtime": 1779762190.6379738,
+    "ast_hash": "fed5e81e8dccdc9f71e0092fe9a3c7aa",
+    "semantic_hash": "fed5e81e8dccdc9f71e0092fe9a3c7aa"
+  },
+  "/Users/christianfurr/Code/calcu/src/components/SemesterView.tsx": {
+    "mtime": 1779762116.8231273,
+    "ast_hash": "79a8f33b860145f8ae35f5675c2a56fa",
+    "semantic_hash": "79a8f33b860145f8ae35f5675c2a56fa"
+  },
+  "/Users/christianfurr/Code/calcu/src/components/Hero.tsx": {
+    "mtime": 1779767013.550617,
+    "ast_hash": "34392a0c37c26f88c8e2848d5eaf6634",
+    "semantic_hash": "34392a0c37c26f88c8e2848d5eaf6634"
+  },
+  "/Users/christianfurr/Code/calcu/src/components/Topbar.tsx": {
+    "mtime": 1779985329.0461414,
+    "ast_hash": "3ad19e21c8993c44081a56d0bac10aaa",
+    "semantic_hash": "3ad19e21c8993c44081a56d0bac10aaa"
+  },
+  "/Users/christianfurr/Code/calcu/src/components/ConfirmModal.tsx": {
+    "mtime": 1779766926.4072707,
+    "ast_hash": "6851468ef4c8e6b5fdc460fea761ddd3",
+    "semantic_hash": "6851468ef4c8e6b5fdc460fea761ddd3"
+  },
+  "/Users/christianfurr/Code/calcu/src/components/SignedOutLanding.tsx": {
+    "mtime": 1779844070.39284,
+    "ast_hash": "6db69d1487f6105445288341d03ed030",
+    "semantic_hash": "6db69d1487f6105445288341d03ed030"
+  },
+  "/Users/christianfurr/Code/calcu/src/components/ClassTabs.tsx": {
+    "mtime": 1779987209.004419,
+    "ast_hash": "1eb4914898115856ebf8124c2bb0c131",
+    "semantic_hash": "1eb4914898115856ebf8124c2bb0c131"
+  },
+  "/Users/christianfurr/Code/calcu/src/components/AddClassModal.tsx": {
+    "mtime": 1779762397.3454776,
+    "ast_hash": "945faf313b964e4f440d7c3bc4dc075b",
+    "semantic_hash": "945faf313b964e4f440d7c3bc4dc075b"
+  },
+  "/Users/christianfurr/Code/calcu/src/components/ClassesSummary.tsx": {
+    "mtime": 1779761921.2768672,
+    "ast_hash": "646c16b9e3ce1f5e34d9010986adb26f",
+    "semantic_hash": "646c16b9e3ce1f5e34d9010986adb26f"
+  },
+  "/Users/christianfurr/Code/calcu/src/components/ConvexClientProvider.tsx": {
+    "mtime": 1779762411.0957472,
+    "ast_hash": "a73b19a9253915f5ba8e4a306bd0d80c",
+    "semantic_hash": "a73b19a9253915f5ba8e4a306bd0d80c"
+  },
+  "/Users/christianfurr/Code/calcu/src/components/ClassDetail.tsx": {
+    "mtime": 1779987242.4685915,
+    "ast_hash": "42ac5d68dbd9b962eab561d151b7906a",
+    "semantic_hash": "42ac5d68dbd9b962eab561d151b7906a"
+  },
+  "/Users/christianfurr/Code/calcu/src/components/SyncControl.tsx": {
+    "mtime": 1779985359.6337564,
+    "ast_hash": "22acd1ccd5ac53e903793a7229934fa5",
+    "semantic_hash": "22acd1ccd5ac53e903793a7229934fa5"
+  },
+  "/Users/christianfurr/Code/calcu/src/components/primitives/Sparkline.tsx": {
+    "mtime": 1779761797.672272,
+    "ast_hash": "259c7424d8f94f425dab5682cd8fb4d1",
+    "semantic_hash": "259c7424d8f94f425dab5682cd8fb4d1"
+  },
+  "/Users/christianfurr/Code/calcu/src/components/primitives/EditableText.tsx": {
+    "mtime": 1779761773.1712654,
+    "ast_hash": "98fcf55b4e32ae6817629d28fc5408d8",
+    "semantic_hash": "98fcf55b4e32ae6817629d28fc5408d8"
+  },
+  "/Users/christianfurr/Code/calcu/src/components/primitives/MiniBar.tsx": {
+    "mtime": 1779761802.3734615,
+    "ast_hash": "8d45e963efa4fb6f1af01fb0743277ee",
+    "semantic_hash": "8d45e963efa4fb6f1af01fb0743277ee"
+  },
+  "/Users/christianfurr/Code/calcu/src/components/primitives/NumberInput.tsx": {
+    "mtime": 1779761790.4896853,
+    "ast_hash": "9aaff863adf79bcb4ef8e844a8207348",
+    "semantic_hash": "9aaff863adf79bcb4ef8e844a8207348"
+  },
+  "/Users/christianfurr/Code/calcu/src/hooks/usePlannerState.ts": {
+    "mtime": 1779767059.8696797,
+    "ast_hash": "8f8b6a184969b50954a7cb5302a82182",
+    "semantic_hash": "8f8b6a184969b50954a7cb5302a82182"
+  },
+  "/Users/christianfurr/Code/calcu/src/lib/samples.ts": {
+    "mtime": 1779761688.3247666,
+    "ast_hash": "1bc6821a650ac5bfb5680e24d88273c3",
+    "semantic_hash": "1bc6821a650ac5bfb5680e24d88273c3"
+  },
+  "/Users/christianfurr/Code/calcu/src/lib/helpers.ts": {
+    "mtime": 1779761669.887092,
+    "ast_hash": "4afae2ccd98e5153c971cfcfebe47a4d",
+    "semantic_hash": "4afae2ccd98e5153c971cfcfebe47a4d"
+  },
+  "/Users/christianfurr/Code/calcu/src/lib/plannerSerialize.ts": {
+    "mtime": 1779763636.2716804,
+    "ast_hash": "f352350cbda0c0909c3e1abc483c8d5b",
+    "semantic_hash": "f352350cbda0c0909c3e1abc483c8d5b"
+  },
+  "/Users/christianfurr/Code/calcu/src/lib/storage.ts": {
+    "mtime": 1779762156.4099584,
+    "ast_hash": "a89588fa2a5c54625c839a86a8cef275",
+    "semantic_hash": "a89588fa2a5c54625c839a86a8cef275"
+  },
+  "/Users/christianfurr/Code/calcu/src/lib/grademath.ts": {
+    "mtime": 1779761746.0811162,
+    "ast_hash": "293eb2d916ea615a02fc00439a06608d",
+    "semantic_hash": "293eb2d916ea615a02fc00439a06608d"
+  },
+  "/Users/christianfurr/Code/calcu/src/lib/parser.ts": {
+    "mtime": 1779987909.9888315,
+    "ast_hash": "7f133067301a0bd55783cac0927157f5",
+    "semantic_hash": "7f133067301a0bd55783cac0927157f5"
+  },
+  "/Users/christianfurr/Code/calcu/src/lib/types.ts": {
+    "mtime": 1779985847.5220125,
+    "ast_hash": "ecffa2b2d1676f3e8239469781454838",
+    "semantic_hash": "ecffa2b2d1676f3e8239469781454838"
+  },
+  "/Users/christianfurr/Code/calcu/src/lib/syncPrefs.ts": {
+    "mtime": 1779985773.235988,
+    "ast_hash": "65fc247ce2bd6622762a5ca5b5ca4ad6",
+    "semantic_hash": "65fc247ce2bd6622762a5ca5b5ca4ad6"
+  },
+  "/Users/christianfurr/Code/calcu/src/lib/classMath.ts": {
+    "mtime": 1779761904.2368155,
+    "ast_hash": "a4ea39565d2067f3842a8956396016cc",
+    "semantic_hash": "a4ea39565d2067f3842a8956396016cc"
+  },
+  "/Users/christianfurr/Code/calcu/src/lib/normalize.ts": {
+    "mtime": 1779985861.9677546,
+    "ast_hash": "807ace3607f5ce6077e5064eaa5b59be",
+    "semantic_hash": "807ace3607f5ce6077e5064eaa5b59be"
+  },
+  "/Users/christianfurr/Code/calcu/README.md": {
+    "mtime": 1779767431.2999918,
+    "ast_hash": "c09beb50704cbb4eeaad6cc1b84357a8",
+    "semantic_hash": "c09beb50704cbb4eeaad6cc1b84357a8"
+  },
+  "/Users/christianfurr/Code/calcu/AGENTS.md": {
+    "mtime": 1779763192.681585,
+    "ast_hash": "1dceecfb9a13b12d62645364c11d4fb4",
+    "semantic_hash": "1dceecfb9a13b12d62645364c11d4fb4"
+  },
+  "/Users/christianfurr/Code/calcu/CLAUDE.md": {
+    "mtime": 1779763192.6818879,
+    "ast_hash": "f052a34888f565626abe863dc18762a6",
+    "semantic_hash": "f052a34888f565626abe863dc18762a6"
+  },
+  "/Users/christianfurr/Code/calcu/.agents/skills/convex-setup-auth/SKILL.md": {
+    "mtime": 1779763194.4941633,
+    "ast_hash": "06366db7119b25ddf68175979166d1a7",
+    "semantic_hash": "06366db7119b25ddf68175979166d1a7"
+  },
+  "/Users/christianfurr/Code/calcu/.agents/skills/convex-setup-auth/references/workos-authkit.md": {
+    "mtime": 1779763194.4947252,
+    "ast_hash": "43b20ab3d92d60ae7785ed73a024ad26",
+    "semantic_hash": "43b20ab3d92d60ae7785ed73a024ad26"
+  },
+  "/Users/christianfurr/Code/calcu/.agents/skills/convex-setup-auth/references/auth0.md": {
+    "mtime": 1779763194.4944835,
+    "ast_hash": "65d097addc858433fe10e97882528ae1",
+    "semantic_hash": "65d097addc858433fe10e97882528ae1"
+  },
+  "/Users/christianfurr/Code/calcu/.agents/skills/convex-setup-auth/references/convex-auth.md": {
+    "mtime": 1779763194.494585,
+    "ast_hash": "6bf92f2d2db0304c5cb3d45751e9e082",
+    "semantic_hash": "6bf92f2d2db0304c5cb3d45751e9e082"
+  },
+  "/Users/christianfurr/Code/calcu/.agents/skills/convex-setup-auth/references/clerk.md": {
+    "mtime": 1779763194.494585,
+    "ast_hash": "692b879bedc8bc5787e1813cd04cf711",
+    "semantic_hash": "692b879bedc8bc5787e1813cd04cf711"
+  },
+  "/Users/christianfurr/Code/calcu/.agents/skills/convex-setup-auth/agents/openai.yaml": {
+    "mtime": 1779763194.4944875,
+    "ast_hash": "6085f6499e386748452563303ad8d075",
+    "semantic_hash": "6085f6499e386748452563303ad8d075"
+  },
+  "/Users/christianfurr/Code/calcu/.agents/skills/convex-migration-helper/SKILL.md": {
+    "mtime": 1779763194.4729283,
+    "ast_hash": "d847b785f67062a334989c89485a81eb",
+    "semantic_hash": "d847b785f67062a334989c89485a81eb"
+  },
+  "/Users/christianfurr/Code/calcu/.agents/skills/convex-migration-helper/references/migration-patterns.md": {
+    "mtime": 1779763194.4738314,
+    "ast_hash": "600a39ee758284cb13184a7c34fb0a9d",
+    "semantic_hash": "600a39ee758284cb13184a7c34fb0a9d"
+  },
+  "/Users/christianfurr/Code/calcu/.agents/skills/convex-migration-helper/references/migrations-component.md": {
+    "mtime": 1779763194.473882,
+    "ast_hash": "405376f176f5e0a9857c69e86386c43e",
+    "semantic_hash": "405376f176f5e0a9857c69e86386c43e"
+  },
+  "/Users/christianfurr/Code/calcu/.agents/skills/convex-migration-helper/agents/openai.yaml": {
+    "mtime": 1779763194.4736407,
+    "ast_hash": "2e6fb6113c711b485feae55627659d19",
+    "semantic_hash": "2e6fb6113c711b485feae55627659d19"
+  },
+  "/Users/christianfurr/Code/calcu/.agents/skills/convex/SKILL.md": {
+    "mtime": 1779763194.4639091,
+    "ast_hash": "a79b3d59cd110f16134585800b876874",
+    "semantic_hash": "a79b3d59cd110f16134585800b876874"
+  },
+  "/Users/christianfurr/Code/calcu/.agents/skills/convex-create-component/SKILL.md": {
+    "mtime": 1779763194.4678688,
+    "ast_hash": "ec825ce9174c3c08775e6189be9c8b80",
+    "semantic_hash": "ec825ce9174c3c08775e6189be9c8b80"
+  },
+  "/Users/christianfurr/Code/calcu/.agents/skills/convex-create-component/references/advanced-patterns.md": {
+    "mtime": 1779763194.4683552,
+    "ast_hash": "c521b78d48ce8ae0bd9613766063e463",
+    "semantic_hash": "c521b78d48ce8ae0bd9613766063e463"
+  },
+  "/Users/christianfurr/Code/calcu/.agents/skills/convex-create-component/references/local-components.md": {
+    "mtime": 1779763194.4681365,
+    "ast_hash": "fa7ca7ad7cb3a6599c0ed76ca7da1cf3",
+    "semantic_hash": "fa7ca7ad7cb3a6599c0ed76ca7da1cf3"
+  },
+  "/Users/christianfurr/Code/calcu/.agents/skills/convex-create-component/references/packaged-components.md": {
+    "mtime": 1779763194.468297,
+    "ast_hash": "f2572e9e30a334c4ca4e96a54f16108b",
+    "semantic_hash": "f2572e9e30a334c4ca4e96a54f16108b"
+  },
+  "/Users/christianfurr/Code/calcu/.agents/skills/convex-create-component/references/hybrid-components.md": {
+    "mtime": 1779763194.4683547,
+    "ast_hash": "927a09d1ec50cffbcbe90c0d3b7145f7",
+    "semantic_hash": "927a09d1ec50cffbcbe90c0d3b7145f7"
+  },
+  "/Users/christianfurr/Code/calcu/.agents/skills/convex-create-component/agents/openai.yaml": {
+    "mtime": 1779763194.4681792,
+    "ast_hash": "0a7ae3f14ed8bbb7a59c8838d8e58bbc",
+    "semantic_hash": "0a7ae3f14ed8bbb7a59c8838d8e58bbc"
+  },
+  "/Users/christianfurr/Code/calcu/.agents/skills/convex-quickstart/SKILL.md": {
+    "mtime": 1779763194.489658,
+    "ast_hash": "6e611fcde8ac05c4c810dcd7fd5068a2",
+    "semantic_hash": "6e611fcde8ac05c4c810dcd7fd5068a2"
+  },
+  "/Users/christianfurr/Code/calcu/.agents/skills/convex-quickstart/agents/openai.yaml": {
+    "mtime": 1779763194.4896483,
+    "ast_hash": "488d168fd73397e3f8d84cc2191214bb",
+    "semantic_hash": "488d168fd73397e3f8d84cc2191214bb"
+  },
+  "/Users/christianfurr/Code/calcu/.agents/skills/convex-performance-audit/SKILL.md": {
+    "mtime": 1779763194.4825718,
+    "ast_hash": "a87f528412cb9f4b9d1a2cae6b77392e",
+    "semantic_hash": "a87f528412cb9f4b9d1a2cae6b77392e"
+  },
+  "/Users/christianfurr/Code/calcu/.agents/skills/convex-performance-audit/references/hot-path-rules.md": {
+    "mtime": 1779763194.4831786,
+    "ast_hash": "8015a530db1586dc684daa40d37c9c5e",
+    "semantic_hash": "8015a530db1586dc684daa40d37c9c5e"
+  },
+  "/Users/christianfurr/Code/calcu/.agents/skills/convex-performance-audit/references/subscription-cost.md": {
+    "mtime": 1779763194.483292,
+    "ast_hash": "6af1c1c1b47d36d2b69002111ce372df",
+    "semantic_hash": "6af1c1c1b47d36d2b69002111ce372df"
+  },
+  "/Users/christianfurr/Code/calcu/.agents/skills/convex-performance-audit/references/function-budget.md": {
+    "mtime": 1779763194.483011,
+    "ast_hash": "7d3345eaa4cadd3706cb7d0c245e91ed",
+    "semantic_hash": "7d3345eaa4cadd3706cb7d0c245e91ed"
+  },
+  "/Users/christianfurr/Code/calcu/.agents/skills/convex-performance-audit/references/occ-conflicts.md": {
+    "mtime": 1779763194.4831743,
+    "ast_hash": "67910e750e26c1d431d8d46e50eca490",
+    "semantic_hash": "67910e750e26c1d431d8d46e50eca490"
+  },
+  "/Users/christianfurr/Code/calcu/.agents/skills/convex-performance-audit/agents/openai.yaml": {
+    "mtime": 1779763194.4827726,
+    "ast_hash": "fcceae233d93de638332d7419443bedf",
+    "semantic_hash": "fcceae233d93de638332d7419443bedf"
+  },
+  "/Users/christianfurr/Code/calcu/docs/superpowers/specs/2026-05-22-comeback-nextjs-design.md": {
+    "mtime": 1779483521.8197532,
+    "ast_hash": "27d26332707f30a1d030bf32d5b595a5",
+    "semantic_hash": "27d26332707f30a1d030bf32d5b595a5"
+  },
+  "/Users/christianfurr/Code/calcu/convex/_generated/ai/guidelines.md": {
+    "mtime": 1779763192.6808748,
+    "ast_hash": "e1d69cf237f235d870171f1c50306b82",
+    "semantic_hash": "e1d69cf237f235d870171f1c50306b82"
+  },
+  "/Users/christianfurr/Code/calcu/.agents/skills/convex-setup-auth/assets/icon.svg": {
+    "mtime": 1779763194.4947493,
+    "ast_hash": "5fd65f0f070bca77e1ea8ed46fbc1fd3",
+    "semantic_hash": "5fd65f0f070bca77e1ea8ed46fbc1fd3"
+  },
+  "/Users/christianfurr/Code/calcu/.agents/skills/convex-migration-helper/assets/icon.svg": {
+    "mtime": 1779763194.4736438,
+    "ast_hash": "d3f9b469ddd0979fdf7a34ffdf0d291d",
+    "semantic_hash": "d3f9b469ddd0979fdf7a34ffdf0d291d"
+  },
+  "/Users/christianfurr/Code/calcu/.agents/skills/convex-create-component/assets/icon.svg": {
+    "mtime": 1779763194.4684634,
+    "ast_hash": "750ee31db4186a3a336f1c6376a15221",
+    "semantic_hash": "750ee31db4186a3a336f1c6376a15221"
+  },
+  "/Users/christianfurr/Code/calcu/.agents/skills/convex-quickstart/assets/icon.svg": {
+    "mtime": 1779763194.4896472,
+    "ast_hash": "ee6d5a57c359c31069c6543131eecfb0",
+    "semantic_hash": "ee6d5a57c359c31069c6543131eecfb0"
+  },
+  "/Users/christianfurr/Code/calcu/.agents/skills/convex-performance-audit/assets/icon.svg": {
+    "mtime": 1779763194.4837055,
+    "ast_hash": "9d96d8029f3a3e73c898bffd41abbf4b",
+    "semantic_hash": "9d96d8029f3a3e73c898bffd41abbf4b"
+  },
+  "/Users/christianfurr/Code/calcu/next-env.d.ts": {
+    "mtime": 1779985440.3738294,
+    "ast_hash": "2a74d3909800ca5467fa83b0ab4a4890",
+    "semantic_hash": "2a74d3909800ca5467fa83b0ab4a4890"
+  },
+  "/Users/christianfurr/Code/calcu/.vercel/project.json": {
+    "mtime": 1779767367.6930943,
+    "ast_hash": "731d5ce5d1ae67903b38d96fb4d93988",
+    "semantic_hash": "731d5ce5d1ae67903b38d96fb4d93988"
+  },
+  "/Users/christianfurr/Code/calcu/src/app/apple-icon.tsx": {
+    "mtime": 1779843635.498978,
+    "ast_hash": "a50600145f07c7f4b668bdee0989daac",
+    "semantic_hash": "a50600145f07c7f4b668bdee0989daac"
+  },
+  "/Users/christianfurr/Code/calcu/src/components/Logo.tsx": {
+    "mtime": 1779843572.5508618,
+    "ast_hash": "7d63c286fc793c9a65a3a5e39d30a4e9",
+    "semantic_hash": "7d63c286fc793c9a65a3a5e39d30a4e9"
+  },
+  "/Users/christianfurr/Code/calcu/.vercel/README.txt": {
+    "mtime": 1779767367.6932974,
+    "ast_hash": "2b13c79d37d6ed82a3255b83b6815034",
+    "semantic_hash": "2b13c79d37d6ed82a3255b83b6815034"
+  },
+  "/Users/christianfurr/Code/calcu/src/app/icon.svg": {
+    "mtime": 1779843559.6926892,
+    "ast_hash": "03883f3989f8d53283eee69079f36916",
+    "semantic_hash": "03883f3989f8d53283eee69079f36916"
+  },
+  "/Users/christianfurr/Code/calcu/convex/skyward.ts": {
+    "mtime": 1779985750.1285596,
+    "ast_hash": "68f851b074f9485371b8ff719c065721",
+    "semantic_hash": "68f851b074f9485371b8ff719c065721"
+  },
+  "/Users/christianfurr/Code/calcu/convex/skywardData.ts": {
+    "mtime": 1779985089.2085998,
+    "ast_hash": "ec662e1edbf6cf91a1f9caf87a6c24ee",
+    "semantic_hash": "ec662e1edbf6cf91a1f9caf87a6c24ee"
+  },
+  "/Users/christianfurr/Code/calcu/src/components/SkywardSyncButton.tsx": {
+    "mtime": 1779985316.024987,
+    "ast_hash": "0bc3357325a5bb3c06fd7875070b2b6b",
+    "semantic_hash": "0bc3357325a5bb3c06fd7875070b2b6b"
+  },
+  "/Users/christianfurr/Code/calcu/src/components/SourceBadge.tsx": {
+    "mtime": 1779987195.5227213,
+    "ast_hash": "ead4210a5a8ed054a6489132338ac6c2",
+    "semantic_hash": "ead4210a5a8ed054a6489132338ac6c2"
+  },
+  "/Users/christianfurr/Code/calcu/src/components/SyncClassModal.tsx": {
+    "mtime": 1779940837.4504976,
+    "ast_hash": "72df7030e01d4c5f848631d4fdc7b0bb",
+    "semantic_hash": "72df7030e01d4c5f848631d4fdc7b0bb"
+  },
+  "/Users/christianfurr/Code/calcu/src/components/SkywardConnectModal.tsx": {
+    "mtime": 1779985220.9722192,
+    "ast_hash": "998d60b5e2a742f892e07bbb73b9bd80",
+    "semantic_hash": "998d60b5e2a742f892e07bbb73b9bd80"
+  },
+  "/Users/christianfurr/Code/calcu/src/components/SkywardTermPicker.tsx": {
+    "mtime": 1779985786.3675413,
+    "ast_hash": "b81b3b0f7c5542cc782f6133e28b22bf",
+    "semantic_hash": "b81b3b0f7c5542cc782f6133e28b22bf"
+  },
+  "/Users/christianfurr/Code/calcu/src/components/SkywardSyncResultModal.tsx": {
+    "mtime": 1779985295.3139212,
+    "ast_hash": "6730fd4fdc9103383c5d746cac11afab",
+    "semantic_hash": "6730fd4fdc9103383c5d746cac11afab"
+  },
+  "/Users/christianfurr/Code/calcu/src/hooks/useSkywardSync.ts": {
+    "mtime": 1779985911.9086607,
+    "ast_hash": "c1f987be827a4e6eace1c237787a8851",
+    "semantic_hash": "c1f987be827a4e6eace1c237787a8851"
+  },
+  "/Users/christianfurr/Code/calcu/src/lib/syncClass.ts": {
+    "mtime": 1779940796.1896987,
+    "ast_hash": "a53472a3ff01c390f3ce48450923b1dc",
+    "semantic_hash": "a53472a3ff01c390f3ce48450923b1dc"
+  },
+  "/Users/christianfurr/Code/calcu/src/lib/skyward/types.ts": {
+    "mtime": 1779984836.4740648,
+    "ast_hash": "f368d0abb5bfb8fb684a2c8939de7ba9",
+    "semantic_hash": "f368d0abb5bfb8fb684a2c8939de7ba9"
+  },
+  "/Users/christianfurr/Code/calcu/src/lib/skyward/client.ts": {
+    "mtime": 1779985059.0739808,
+    "ast_hash": "653e55283b29647f3dff88e88a6672a3",
+    "semantic_hash": "653e55283b29647f3dff88e88a6672a3"
+  },
+  "/Users/christianfurr/Code/calcu/src/lib/skyward/index.ts": {
+    "mtime": 1779984975.4464445,
+    "ast_hash": "db289f93f909e75b07b15054355cb65c",
+    "semantic_hash": "db289f93f909e75b07b15054355cb65c"
+  },
+  "/Users/christianfurr/Code/calcu/src/lib/skyward/auth.ts": {
+    "mtime": 1779984897.6773734,
+    "ast_hash": "82a143674085e8e3cd052fdb7f6ae8ae",
+    "semantic_hash": "82a143674085e8e3cd052fdb7f6ae8ae"
+  },
+  "/Users/christianfurr/Code/calcu/src/lib/skyward/parsers/gradebook.ts": {
+    "mtime": 1779984921.7558556,
+    "ast_hash": "fccdb3d8955a5ae1d0811584c1f77091",
+    "semantic_hash": "fccdb3d8955a5ae1d0811584c1f77091"
+  },
+  "/Users/christianfurr/Code/calcu/src/lib/skyward/parsers/assignments.ts": {
+    "mtime": 1779987919.8010771,
+    "ast_hash": "c19954db6a565ecfebcca0668548f265",
+    "semantic_hash": "c19954db6a565ecfebcca0668548f265"
+  },
+  "/Users/christianfurr/Code/calcu/docs/superpowers/specs/2026-05-28-skyward-sync-design.md": {
+    "mtime": 1779984774.347536,
+    "ast_hash": "fb9a67012e59220dba9bf6d1cf0edbbe",
+    "semantic_hash": "fb9a67012e59220dba9bf6d1cf0edbbe"
+  }
+}

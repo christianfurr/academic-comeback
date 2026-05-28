@@ -1,0 +1,22 @@
+# .graphifyignore — gitignore syntax, ! negation supported
+
+# dependencies & build output
+node_modules/
+.next/
+graphify-out/
+
+# generated / vendored noise (created 100+ leaf nodes last run)
+convex/_generated/
+.agents/
+skills-lock.json
+public/
+
+# build & tooling configs (config-key leaf nodes, no architecture signal)
+eslint.config.mjs
+postcss.config.mjs
+next.config.ts
+tsconfig.json
+convex/tsconfig.json
+
+# Result: indexes src/ app code, convex/*.ts backend (schema, plannerStates,
+# auth.config), and the README/AGENTS/CLAUDE/docs prose.
