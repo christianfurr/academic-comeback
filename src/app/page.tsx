@@ -7,6 +7,7 @@ import { ClassesSummary } from "@/components/ClassesSummary";
 import { ConfirmModal } from "@/components/ConfirmModal";
 import { Hero } from "@/components/Hero";
 import { Logo } from "@/components/Logo";
+import { PlannerSkeleton } from "@/components/PlannerSkeleton";
 import { SemesterView } from "@/components/SemesterView";
 import { SignedOutLanding } from "@/components/SignedOutLanding";
 import { SkywardConnectModal } from "@/components/SkywardConnectModal";
@@ -127,11 +128,7 @@ export default function HomePage() {
   const active = classes.find((c) => c.id === activeId) ?? null;
 
   if (!isLoaded || !hydrated) {
-    return (
-      <div className="mx-auto flex min-h-full w-full max-w-[1280px] flex-col px-12 max-sm:px-5">
-        <div className="py-20 text-[14.5px] text-[var(--muted)]">Loading…</div>
-      </div>
-    );
+    return <PlannerSkeleton />;
   }
 
   if (!isSignedIn) {
