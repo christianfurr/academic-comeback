@@ -1,4 +1,4 @@
-import type { ParsedCourse } from "@/lib/types";
+import type { ParsedAssignment, ParsedCategory, ParsedCourse } from "@/lib/types";
 
 const MISSING_TOKENS = new Set([
   "",
@@ -424,12 +424,138 @@ function tryGenericFormat(text: string): ParsedCourse[] | null {
 }
 
 // ===================================================================
+// SKYWARD PASTE FORMAT — category rows + "X out of Y", no weights
+//   Due | Assignment | Grade | Score(%) | Points Earned | Missing | No Count | Absent
+// Categories are rows with no leading date; real assignments always
+// start with a MM/DD/YY date. Categories may carry no weight at all.
+// ===================================================================
+const SKY_DATE = /^\d{1,2}\/\d{1,2}\/\d{2,4}$/;
+const SKY_POINTS = /^([\d.]+|\*)\s+out of\s+([\d.]+)$/i;
+const SKY_PERCENT = /^\d+(?:\.\d+)?%?$/;
+const SKY_LETTER = /^[A-F][+\-]?(?:\s+comments)?$/i;
+const SKY_FLAG = /^(missing|no count|excused|unexcused|exempt|late|absent)\b/i;
+const SKY_EMPTY_CAT = /^there are no .* assignments?\.?$/i;
+
+function isSkywardHeader(cells: string[]): boolean {
+  const joined = cells.join(" ").toLowerCase();
+  return /\bassignment\b/.test(joined) && /(points earned|score\s*\(?%)/.test(joined);
+}
+
+function firstMetaIndex(cells: string[], from: number): number {
+  for (let i = from; i < cells.length; i++) {
+    const c = cells[i];
+    if (SKY_LETTER.test(c) || SKY_PERCENT.test(c) || SKY_POINTS.test(c) || SKY_FLAG.test(c)) {
+      return i;
+    }
+  }
+  return cells.length;
+}
+
+function trySkywardPasteFormat(text: string): ParsedCourse[] | null {
+  const lines = splitLines(text);
+  let sawHeader = false;
+
+  const cats: Array<{
+    name: string;
+    assignments: ParsedAssignment[];
+  }> = [];
+  let current: (typeof cats)[number] | null = null;
+
+  const ensureCat = (name: string) => {
+    let cat = cats.find((c) => c.name === name);
+    if (!cat) {
+      cat = { name, assignments: [] };
+      cats.push(cat);
+    }
+    current = cat;
+  };
+
+  for (const raw of lines) {
+    if (!raw.trim()) continue;
+    const cells = splitCells(raw)
+      .map((c) => c.trim())
+      .filter(Boolean);
+    if (cells.length === 0) continue;
+
+    if (SKY_EMPTY_CAT.test(cells.join(" "))) continue;
+
+    const hasDate = SKY_DATE.test(cells[0]);
+
+    if (!hasDate) {
+      if (isSkywardHeader(cells)) {
+        sawHeader = true;
+        continue;
+      }
+      // No date → category header (the rollup row, if any, is ignored).
+      const meta = firstMetaIndex(cells, 1);
+      ensureCat(cells.slice(0, meta).join(" "));
+      continue;
+    }
+
+    if (!current) ensureCat("Uncategorized");
+
+    const meta = firstMetaIndex(cells, 1);
+    const name = cells.slice(1, meta).join(" ");
+    if (!name) continue;
+
+    const pointsCell = cells.find((c) => SKY_POINTS.test(c));
+    if (!pointsCell) continue;
+    const pm = pointsCell.match(SKY_POINTS);
+    if (!pm) continue;
+    const total = Number.parseFloat(pm[2]);
+    if (!Number.isFinite(total) || total === 0) continue;
+    let earned: number | null = pm[1] === "*" ? null : Number.parseFloat(pm[1]);
+
+    const letterCell = cells.slice(1, meta + 2).find((c) => SKY_LETTER.test(c));
+    const letter = letterCell ? letterCell.replace(/\s+comments$/i, "").trim() : null;
+
+    const missing = earned === null || cells.some((c) => /^missing\b/i.test(c));
+    const noCount = cells.some((c) => /^no count\b/i.test(c));
+    if (missing) earned = null;
+
+    current!.assignments.push({
+      name,
+      letter,
+      date: cells[0],
+      score: missing ? null : earned,
+      total,
+      missing,
+      noCount,
+    });
+  }
+
+  if (!sawHeader) return null;
+
+  const filled = cats.filter((c) => c.assignments.length > 0);
+  if (filled.length === 0) return null;
+
+  // No weights in this format — distribute equally across non-empty categories.
+  const each = Math.round(100 / filled.length);
+  const categories: ParsedCategory[] = filled.map((c, idx) => ({
+    name: c.name,
+    weight: idx === filled.length - 1 ? 100 - each * (filled.length - 1) : each,
+    assignments: c.assignments,
+  }));
+
+  return [{ name: "Untitled Class", categories }];
+}
+
+// ===================================================================
 // PUBLIC API — returns array of courses
 // ===================================================================
 export function parseGradeData(text: string): ParsedCourse[] | null {
   if (!text.trim()) return null;
 
   let result = tryPortalFormat(text);
+  if (
+    result &&
+    result.length > 0 &&
+    result.some((c) => c.categories.some((cat) => cat.assignments.length > 0))
+  ) {
+    return result;
+  }
+
+  result = trySkywardPasteFormat(text);
   if (
     result &&
     result.length > 0 &&
