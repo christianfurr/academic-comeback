@@ -11,7 +11,10 @@ export type Assignment = {
   noCount: boolean;
   /** 0–100, used for projected math */
   whatIf: number | null;
+  status?: AssignmentStatus;
 };
+
+export type AssignmentStatus = "not-started" | "in-progress" | "submitted";
 
 export type Category = {
   id: string;
@@ -42,7 +45,7 @@ export type Tweaks = {
   density: "comfortable" | "compact";
 };
 
-export type ViewMode = "class" | "semester";
+export type ViewMode = "class" | "today" | "semester";
 
 export type PlanTask = {
   id: string;
@@ -50,6 +53,14 @@ export type PlanTask = {
   title: string;
   dueDate: string | null;
   completed: boolean;
+  effort: 15 | 30 | 60 | 90;
+};
+
+export type ProgressSnapshot = {
+  date: string;
+  classId: string;
+  current: number;
+  projected: number;
 };
 
 export type AppState = {
@@ -59,6 +70,7 @@ export type AppState = {
   view: ViewMode;
   tweaks: Tweaks;
   tasks: PlanTask[];
+  progress: ProgressSnapshot[];
 };
 
 // Parser output (pre-normalization)
