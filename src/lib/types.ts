@@ -44,12 +44,21 @@ export type Tweaks = {
 
 export type ViewMode = "class" | "semester";
 
+export type PlanTask = {
+  id: string;
+  classId: string;
+  title: string;
+  dueDate: string | null;
+  completed: boolean;
+};
+
 export type AppState = {
   version: number;
   classes: ClassData[];
   activeId: string | null;
   view: ViewMode;
   tweaks: Tweaks;
+  tasks: PlanTask[];
 };
 
 // Parser output (pre-normalization)
@@ -73,4 +82,3 @@ export type ParsedCourse = {
   name: string;
   categories: ParsedCategory[];
 };
-
