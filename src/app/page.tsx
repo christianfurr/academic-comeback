@@ -29,7 +29,7 @@ import { useEffect, useState } from "react";
 import { api } from "../../convex/_generated/api";
 
 export default function HomePage() {
-  const { isLoaded, isSignedIn } = useAuth();
+  const { isSignedIn } = useAuth();
   const {
     classes,
     setClasses,
@@ -131,7 +131,10 @@ export default function HomePage() {
 
   const active = classes.find((c) => c.id === activeId) ?? null;
 
-  if (!isLoaded || !hydrated) {
+  // Local planner state can render independently of Clerk. Keeping the whole
+  // page behind Clerk's client-ready flag leaves signed-out visitors on the
+  // skeleton forever when the auth script is slow or blocked.
+  if (!hydrated) {
     return <PlannerSkeleton />;
   }
 
