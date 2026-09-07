@@ -3,13 +3,15 @@
 import { EditableText } from "@/components/primitives/EditableText";
 import { buildClassPlan, planSummary, type PlanItem } from "@/lib/planMath";
 import { uid } from "@/lib/helpers";
-import type { ClassData, PlanTask } from "@/lib/types";
+import { computeProjected } from "@/lib/grademath";
+import type { AssignmentStatus, ClassData, PlanTask } from "@/lib/types";
 import { useMemo, useState } from "react";
 
 type Props = {
   cls: ClassData;
   tasks: PlanTask[];
   onTasksChange: (tasks: PlanTask[]) => void;
+  onClassChange: (cls: ClassData) => void;
 };
 
 function formatDueDate(date: string | null): string | null {
@@ -22,9 +24,10 @@ function formatDueDate(date: string | null): string | null {
   return parsed.toLocaleDateString(undefined, { month: "short", day: "numeric" });
 }
 
-export function GamePlan({ cls, tasks, onTasksChange }: Props) {
+export function GamePlan({ cls, tasks, onTasksChange, onClassChange }: Props) {
   const [title, setTitle] = useState("");
   const [dueDate, setDueDate] = useState("");
+  const [effort, setEffort] = useState<PlanTask["effort"]>(30);
   const items = useMemo(() => buildClassPlan(cls, tasks), [cls, tasks]);
   const summary = planSummary(items);
   const customTasks = tasks.filter((task) => task.classId === cls.id);
@@ -34,10 +37,11 @@ export function GamePlan({ cls, tasks, onTasksChange }: Props) {
     if (!trimmed) return;
     onTasksChange([
       ...tasks,
-      { id: uid(), classId: cls.id, title: trimmed, dueDate: dueDate || null, completed: false },
+      { id: uid(), classId: cls.id, title: trimmed, dueDate: dueDate || null, completed: false, effort },
     ]);
     setTitle("");
     setDueDate("");
+    setEffort(30);
   };
 
   const updateTask = (id: string, patch: Partial<PlanTask>) =>
@@ -50,6 +54,42 @@ export function GamePlan({ cls, tasks, onTasksChange }: Props) {
       behavior: "smooth",
       block: "center",
     });
+  };
+
+  const updateAssignmentStatus = (id: string, status: AssignmentStatus) => {
+    onClassChange({
+      ...cls,
+      categories: cls.categories.map((category) => ({
+        ...category,
+        assignments: category.assignments.map((assignment) =>
+          assignment.id === id ? { ...assignment, status } : assignment,
+        ),
+      })),
+    });
+  };
+
+  const scenarioGrade = (score: number) =>
+    computeProjected(
+      cls.categories.map((category) => ({
+        ...category,
+        assignments: category.assignments.map((assignment) =>
+          assignment.missing ? { ...assignment, whatIf: score } : assignment,
+        ),
+      })),
+    ).overall;
+
+  const copyTeacherChecklist = async () => {
+    const missing = items.filter((item) => item.kind === "assignment").slice(0, 8);
+    const lines = [
+      `Questions about ${cls.name}`,
+      `Target: ${cls.target}%`,
+      "",
+      "Could we talk through these items?",
+      ...missing.map((item) => `- ${item.title}`),
+      "",
+      "Are retakes, corrections, extra credit, or extensions available?",
+    ];
+    await navigator.clipboard?.writeText(lines.join("\n"));
   };
 
   return (
@@ -86,6 +126,7 @@ export function GamePlan({ cls, tasks, onTasksChange }: Props) {
               onEdit={(value) => item.kind === "task" && updateTask(item.id, { title: value })}
               onDelete={() => item.kind === "task" && removeTask(item.id)}
               onOpen={() => item.kind === "assignment" && focusAssignment(item.id)}
+              onStatusChange={(status) => item.kind === "assignment" && updateAssignmentStatus(item.id, status)}
             />
           ))}
         </div>
@@ -119,7 +160,27 @@ export function GamePlan({ cls, tasks, onTasksChange }: Props) {
         <button type="submit" className="btn-ghost whitespace-nowrap" disabled={!title.trim()}>
           + add task
         </button>
+        <select
+          value={effort}
+          onChange={(event) => setEffort(Number(event.target.value) as PlanTask["effort"])}
+          className="bg-transparent px-1 text-[12px] text-[var(--muted)] outline-none focus:ring-1 focus:ring-[var(--accent)]"
+          aria-label="Task effort"
+        >
+          {[15, 30, 60, 90].map((minutes) => <option key={minutes} value={minutes}>{minutes} min</option>)}
+        </select>
       </form>
+
+      <div className="mt-4 flex flex-wrap items-center gap-2">
+        <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-[var(--muted)]">If you average:</span>
+        {[70, 80, 90, 100].map((score) => (
+          <span key={score} className="border border-[var(--border)] px-2 py-1 font-mono text-[11px] text-[var(--muted)]">
+            {score}% → {scenarioGrade(score).toFixed(1)}%
+          </span>
+        ))}
+        <button type="button" onClick={() => void copyTeacherChecklist()} className="btn-ghost ml-auto">
+          copy teacher questions
+        </button>
+      </div>
 
       {customTasks.length > 0 && summary.open === 0 ? (
         <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.1em] text-[var(--ace)]">
@@ -137,6 +198,7 @@ function PlanRow({
   onEdit,
   onDelete,
   onOpen,
+  onStatusChange,
 }: {
   item: PlanItem;
   index: number;
@@ -144,6 +206,7 @@ function PlanRow({
   onEdit: (value: string) => void;
   onDelete: () => void;
   onOpen: () => void;
+  onStatusChange: (status: AssignmentStatus) => void;
 }) {
   const due = formatDueDate(item.dueDate);
   return (
@@ -172,7 +235,18 @@ function PlanRow({
           {due ? <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-[var(--muted)]">{due}</span> : null}
         </div>
         <div className="mt-1 flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase tracking-[0.08em] text-[var(--muted)]">
-          <span className={item.kind === "assignment" ? "text-[var(--accent)]" : ""}>{item.kind === "assignment" ? "highest-impact work" : "your task"}</span>
+          {item.kind === "assignment" ? (
+            <select
+              value={item.status}
+              onChange={(event) => onStatusChange(event.target.value as AssignmentStatus)}
+              className="bg-transparent text-[10px] uppercase tracking-[0.08em] text-[var(--accent)] outline-none focus:ring-1 focus:ring-[var(--accent)]"
+              aria-label={`Status for ${item.title}`}
+            >
+              <option value="not-started">not started</option>
+              <option value="in-progress">in progress</option>
+              <option value="submitted">submitted</option>
+            </select>
+          ) : <span>your task · {item.effort} min</span>}
           {item.kind === "assignment" && item.impact !== null ? <span>{item.impact.toFixed(1)} grade points at stake</span> : null}
         </div>
       </div>

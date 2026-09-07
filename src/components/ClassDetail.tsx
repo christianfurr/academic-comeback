@@ -2,6 +2,7 @@
 
 import { EditableText } from "@/components/primitives/EditableText";
 import { GamePlan } from "@/components/GamePlan";
+import { ProgressHistory } from "@/components/ProgressHistory";
 import { MiniBar } from "@/components/primitives/MiniBar";
 import { NumberInput } from "@/components/primitives/NumberInput";
 import { Sparkline } from "@/components/primitives/Sparkline";
@@ -10,7 +11,7 @@ import { SyncClassModal } from "@/components/SyncClassModal";
 import { assignmentImpact, classCurrent, classMissing, classNeeded, classProjected } from "@/lib/classMath";
 import { clamp, fmt, fmtPts, gradeTone, letterFor } from "@/lib/helpers";
 import { categoryStats, categoryStatsProjected } from "@/lib/grademath";
-import type { Category, ClassData, PlanTask } from "@/lib/types";
+import type { Category, ClassData, PlanTask, ProgressSnapshot } from "@/lib/types";
 import { useEffect, useMemo, useState } from "react";
 
 type Props = {
@@ -22,9 +23,11 @@ type Props = {
   skywardSyncing?: boolean;
   tasks: PlanTask[];
   onTasksChange: (tasks: PlanTask[]) => void;
+  onClassChange: (cls: ClassData) => void;
+  progress: ProgressSnapshot[];
 };
 
-export function ClassDetail({ cls, onUpdate, onDelete, onSkywardSync, skywardSyncing, tasks, onTasksChange }: Props) {
+export function ClassDetail({ cls, onUpdate, onDelete, onSkywardSync, skywardSyncing, tasks, onTasksChange, onClassChange, progress }: Props) {
   const [showSync, setShowSync] = useState(false);
   const isSkyward = cls.source === "skyward";
   const skywardSyncAvailable = isSkyward && !!onSkywardSync;
@@ -49,7 +52,8 @@ export function ClassDetail({ cls, onUpdate, onDelete, onSkywardSync, skywardSyn
         }
         syncDisabled={skywardSyncAvailable && !!skywardSyncing}
       />
-      <GamePlan cls={cls} tasks={tasks} onTasksChange={onTasksChange} />
+      <GamePlan cls={cls} tasks={tasks} onTasksChange={onTasksChange} onClassChange={onClassChange} />
+      <ProgressHistory points={progress} />
       <ComebackPath cls={cls} onUpdate={onUpdate} />
       <CategoriesSection cls={cls} onUpdate={onUpdate} />
       {showSync ? (

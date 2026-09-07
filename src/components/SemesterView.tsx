@@ -2,16 +2,17 @@
 
 import { classCurrent, classMissing, classNeeded, classProjected, assignmentImpact } from "@/lib/classMath";
 import { clamp, fmt, gradeTone, letterFor } from "@/lib/helpers";
-import type { ClassData } from "@/lib/types";
+import type { ClassData, PlanTask } from "@/lib/types";
 import { Sparkline } from "@/components/primitives/Sparkline";
 import { useMemo } from "react";
 
 type Props = {
   classes: ClassData[];
+  tasks: PlanTask[];
   onOpenClass: (id: string) => void;
 };
 
-export function SemesterView({ classes, onOpenClass }: Props) {
+export function SemesterView({ classes, tasks, onOpenClass }: Props) {
   const allMissing = useMemo(() => {
     const out: Array<{
       id: string;
@@ -48,7 +49,7 @@ export function SemesterView({ classes, onOpenClass }: Props) {
         </div>
         <div className="grid gap-3 [grid-template-columns:repeat(auto-fill,minmax(280px,1fr))]">
           {classes.map((c) => (
-            <SemesterCard key={c.id} cls={c} onOpen={() => onOpenClass(c.id)} />
+            <SemesterCard key={c.id} cls={c} taskCount={tasks.filter((task) => task.classId === c.id && !task.completed).length} onOpen={() => onOpenClass(c.id)} />
           ))}
         </div>
       </div>
@@ -101,7 +102,7 @@ export function SemesterView({ classes, onOpenClass }: Props) {
   );
 }
 
-function SemesterCard({ cls, onOpen }: { cls: ClassData; onOpen: () => void }) {
+function SemesterCard({ cls, taskCount, onOpen }: { cls: ClassData; taskCount: number; onOpen: () => void }) {
   const current = classCurrent(cls);
   const projected = classProjected(cls);
   const needed = classNeeded(cls);
@@ -153,7 +154,7 @@ function SemesterCard({ cls, onOpen }: { cls: ClassData; onOpen: () => void }) {
       </div>
 
       <div className="mt-3 flex items-center justify-between text-[12px]">
-        <span className="font-mono text-[11px] text-[var(--muted)]">{missingCount} missing</span>
+        <span className="font-mono text-[11px] text-[var(--muted)]">{missingCount} missing · {taskCount} planned</span>
         {needed !== null && Number.isFinite(needed) && needed > 0 && needed <= 100 ? (
           <span className="font-mono text-[11px] text-[var(--ink)]">
             need <strong>{fmt(needed, 0)}%</strong> avg
@@ -171,4 +172,3 @@ function SemesterCard({ cls, onOpen }: { cls: ClassData; onOpen: () => void }) {
     </button>
   );
 }
-
