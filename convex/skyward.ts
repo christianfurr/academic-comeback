@@ -270,9 +270,10 @@ export const syncFromSkyward = action({
       // KPHS classes are online-course records and may only expose their active Q1
       // grade while the shared picker is already on Q4. Keep those courses visible
       // by falling back to their latest graded term instead of dropping them.
-      const term = args.term
-        ? resolveTerm(cls, args.term) ?? (isKphsClassName(cls.name) ? currentTermFor(cls) : null)
-        : currentTermFor(cls);
+      let term = args.term ? resolveTerm(cls, args.term) : currentTermFor(cls);
+      if (args.term && (!term || !term.letter) && isKphsClassName(cls.name)) {
+        term = currentTermFor(cls);
+      }
       if (!term) return; // skip — class isn't enrolled in this term
       // If the requested term has no letter, the class hasn't been graded there;
       // treat that as "not enrolled this term" and skip rather than pulling stale assignments.
