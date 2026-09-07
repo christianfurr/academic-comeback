@@ -1,6 +1,7 @@
 "use client";
 
 import { EditableText } from "@/components/primitives/EditableText";
+import { GamePlan } from "@/components/GamePlan";
 import { MiniBar } from "@/components/primitives/MiniBar";
 import { NumberInput } from "@/components/primitives/NumberInput";
 import { Sparkline } from "@/components/primitives/Sparkline";
@@ -9,7 +10,7 @@ import { SyncClassModal } from "@/components/SyncClassModal";
 import { assignmentImpact, classCurrent, classMissing, classNeeded, classProjected } from "@/lib/classMath";
 import { clamp, fmt, fmtPts, gradeTone, letterFor } from "@/lib/helpers";
 import { categoryStats, categoryStatsProjected } from "@/lib/grademath";
-import type { Category, ClassData } from "@/lib/types";
+import type { Category, ClassData, PlanTask } from "@/lib/types";
 import { useEffect, useMemo, useState } from "react";
 
 type Props = {
@@ -19,9 +20,11 @@ type Props = {
   /** Provided when Skyward is connected; called with the class name to sync just this class. */
   onSkywardSync?: (className: string) => void;
   skywardSyncing?: boolean;
+  tasks: PlanTask[];
+  onTasksChange: (tasks: PlanTask[]) => void;
 };
 
-export function ClassDetail({ cls, onUpdate, onDelete, onSkywardSync, skywardSyncing }: Props) {
+export function ClassDetail({ cls, onUpdate, onDelete, onSkywardSync, skywardSyncing, tasks, onTasksChange }: Props) {
   const [showSync, setShowSync] = useState(false);
   const isSkyward = cls.source === "skyward";
   const skywardSyncAvailable = isSkyward && !!onSkywardSync;
@@ -46,6 +49,7 @@ export function ClassDetail({ cls, onUpdate, onDelete, onSkywardSync, skywardSyn
         }
         syncDisabled={skywardSyncAvailable && !!skywardSyncing}
       />
+      <GamePlan cls={cls} tasks={tasks} onTasksChange={onTasksChange} />
       <ComebackPath cls={cls} onUpdate={onUpdate} />
       <CategoriesSection cls={cls} onUpdate={onUpdate} />
       {showSync ? (
@@ -466,6 +470,7 @@ function ComebackPath({ cls, onUpdate }: { cls: ClassData; onUpdate: (next: Clas
           return (
             <div
               key={a.id}
+              data-assignment-id={a.id}
               className="grid items-center gap-6 border-b border-[var(--rule)] px-6 py-5 last:border-b-0 lg:grid-cols-[36px_minmax(220px,2.8fr)_minmax(180px,2fr)_130px]"
             >
               <div className="font-mono text-[13px] text-[var(--muted)]">{String(idx + 1).padStart(2, "0")}</div>
@@ -1072,4 +1077,3 @@ function StickyProjectedBar({ cls }: { cls: ClassData }) {
     </div>
   );
 }
-

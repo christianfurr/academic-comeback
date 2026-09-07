@@ -10,7 +10,7 @@ import {
   STATE_VERSION,
 } from "@/lib/storage";
 import { loadCloudOptOut, saveCloudOptOut } from "@/lib/syncPrefs";
-import type { AppState, ClassData, Tweaks, ViewMode } from "@/lib/types";
+import type { AppState, ClassData, PlanTask, Tweaks, ViewMode } from "@/lib/types";
 import { useConvexAuth, useMutation, useQuery } from "convex/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -27,6 +27,7 @@ export function usePlannerState(isSignedIn: boolean) {
   const [activeId, setActiveId] = useState<string | null>(null);
   const [view, setView] = useState<ViewMode>("class");
   const [tweaks, setTweaks] = useState<Tweaks>(DEFAULT_TWEAKS);
+  const [tasks, setTasks] = useState<PlanTask[]>([]);
   const [hydrated, setHydrated] = useState(false);
 
   const [syncStatus, setSyncStatus] = useState<SyncStatus>("off");
@@ -47,14 +48,15 @@ export function usePlannerState(isSignedIn: boolean) {
     setClasses(snapshot.classes);
     setActiveId(snapshot.activeId ?? snapshot.classes[0]?.id ?? null);
     setView(snapshot.view ?? "class");
+    setTasks(snapshot.tasks ?? []);
     if (snapshot.tweaks && snapshot.version === STATE_VERSION) {
       setTweaks((t) => ({ ...t, ...snapshot.tweaks }));
     }
   }, []);
 
   const getSnapshot = useCallback(
-    (): AppState => buildAppState(classes, activeId, view, tweaks),
-    [classes, activeId, view, tweaks],
+    (): AppState => buildAppState(classes, activeId, view, tweaks, tasks),
+    [classes, activeId, view, tweaks, tasks],
   );
 
   // Load preferences (client only).
@@ -136,7 +138,7 @@ export function usePlannerState(isSignedIn: boolean) {
   useEffect(() => {
     if (!hydrated) return;
     saveLocalState(getSnapshot());
-  }, [classes, activeId, view, tweaks, hydrated, getSnapshot]);
+  }, [classes, activeId, view, tweaks, tasks, hydrated, getSnapshot]);
 
   // Debounced cloud save once first sync is done.
   useEffect(() => {
@@ -204,6 +206,7 @@ export function usePlannerState(isSignedIn: boolean) {
   const resetAll = useCallback(async () => {
     setClasses([]);
     setActiveId(null);
+    setTasks([]);
     clearLocalState();
     if (cloudActive) {
       try {
@@ -224,6 +227,8 @@ export function usePlannerState(isSignedIn: boolean) {
     setView,
     tweaks,
     setTweaks,
+    tasks,
+    setTasks,
     hydrated: hydrated && prefsLoaded,
     cloudActive,
     cloudOptOut,

@@ -17,6 +17,7 @@ export function parseAppStateJson(json: string): AppState | null {
       classes: parsed.classes,
       activeId: typeof parsed.activeId === "string" ? parsed.activeId : null,
       view: parsed.view === "semester" ? "semester" : "class",
+      tasks: Array.isArray(parsed.tasks) ? parsed.tasks : [],
       tweaks:
         parsed.tweaks && version === STATE_VERSION
           ? { ...DEFAULT_TWEAKS, ...parsed.tweaks }
@@ -32,6 +33,7 @@ export function buildAppState(
   activeId: AppState["activeId"],
   view: AppState["view"],
   tweaks: AppState["tweaks"],
+  tasks: AppState["tasks"],
 ): AppState {
-  return { version: STATE_VERSION, classes, activeId, view, tweaks };
+  return { version: STATE_VERSION, classes, activeId, view, tweaks, tasks };
 }
