@@ -32,25 +32,25 @@ The class dashboard gets a compact “Game plan” section above the detailed br
 
 ## Work items
 
-### CN-001 — Add versioned task state and persistence
+### CN-001: Add versioned task state and persistence
 
 Files: `src/lib/types.ts`, `src/lib/plannerSerialize.ts`, `src/lib/storage.ts`, `src/hooks/usePlannerState.ts`, `convex/plannerStates.ts`.
 
 Acceptance: Existing planner snapshots migrate to the new state shape without data loss; custom task edits and completion state save locally and through the existing debounced Convex path; reset clears tasks with the planner.
 
-### CN-002 — Add task ranking and class plan domain helpers
+### CN-002: Add task ranking and class plan domain helpers
 
 Files: `src/lib/classMath.ts`, `src/lib/planMath.ts`.
 
 Acceptance: Helpers produce stable, deterministic plan items for missing assignments and custom tasks, use existing grade-impact math, and handle no assignments, no due dates, completed tasks, and already-reached targets.
 
-### CN-003 — Build the class Game Plan UI
+### CN-003: Build the class Game Plan UI
 
 Files: `src/components/ClassDetail.tsx`, `src/components/GamePlan.tsx`, `src/components/primitives/EditableText.tsx` only if required.
 
 Acceptance: The class view shows prioritized imported work and custom tasks; students can add, edit, delete, complete, and date custom tasks; imported items link to their what-if controls; the surface has loading, empty, and completed states and works at 390px and 1440px.
 
-### CN-004 — Review, cleanup, and verification
+### CN-004: Review, cleanup, and verification
 
 Files: touched feature files plus `.cairn/features/2026-09-06-academic-game-plan/REVIEW.md`.
 

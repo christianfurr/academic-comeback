@@ -37,6 +37,8 @@ export default function HomePage() {
     view,
     setView,
     tweaks,
+    tasks,
+    setTasks,
     hydrated,
     cloudActive,
     cloudAvailable,
@@ -232,6 +234,8 @@ export default function HomePage() {
               {active ? (
                 <ClassDetail
                   cls={active}
+                  tasks={tasks}
+                  onTasksChange={setTasks}
                   onUpdate={handleUpdate}
                   onDelete={() => handleDelete(active.id)}
                   skywardSyncing={skywardSyncState.kind === "syncing"}
