@@ -17,6 +17,7 @@ import { SkywardTermPicker } from "@/components/SkywardTermPicker";
 import { loadSkywardTerm, saveSkywardTerm, type SkywardTerm } from "@/lib/syncPrefs";
 import { SyncControl } from "@/components/SyncControl";
 import { Topbar } from "@/components/Topbar";
+import { TodayView } from "@/components/TodayView";
 import { usePlannerState } from "@/hooks/usePlannerState";
 import { useSkywardSync } from "@/hooks/useSkywardSync";
 import { normalizeParsedCourses, newBlankClass } from "@/lib/normalize";
@@ -39,6 +40,7 @@ export default function HomePage() {
     tweaks,
     tasks,
     setTasks,
+    progress,
     hydrated,
     cloudActive,
     cloudAvailable,
@@ -215,9 +217,12 @@ export default function HomePage() {
         <div className="py-8 flex flex-col gap-8">
           <ClassesSummary classes={classes} />
 
-          {view === "semester" ? (
+          {view === "today" ? (
+            <TodayView classes={classes} tasks={tasks} onOpenClass={(id) => { setActiveId(id); setView("class"); }} />
+          ) : view === "semester" ? (
             <SemesterView
               classes={classes}
+              tasks={tasks}
               onOpenClass={(id) => {
                 setActiveId(id);
                 setView("class");
@@ -236,6 +241,8 @@ export default function HomePage() {
                   cls={active}
                   tasks={tasks}
                   onTasksChange={setTasks}
+                  onClassChange={handleUpdate}
+                  progress={progress.filter((point) => point.classId === active.id)}
                   onUpdate={handleUpdate}
                   onDelete={() => handleDelete(active.id)}
                   skywardSyncing={skywardSyncState.kind === "syncing"}

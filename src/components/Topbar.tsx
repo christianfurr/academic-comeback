@@ -51,6 +51,12 @@ export function Topbar({
                 Class focus
               </button>
               <button
+                className={["px-3.5 py-1.5 text-[12px] font-medium rounded-full transition-colors", view === "today" ? "bg-[var(--ink)] text-[var(--bg)]" : "text-[var(--muted)] hover:text-[var(--ink)]"].join(" ")}
+                onClick={() => setView("today")}
+              >
+                Today
+              </button>
+              <button
                 className={[
                   "px-3.5 py-1.5 text-[12px] font-medium rounded-full transition-colors",
                   view === "semester"

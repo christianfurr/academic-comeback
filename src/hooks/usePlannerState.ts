@@ -10,7 +10,8 @@ import {
   STATE_VERSION,
 } from "@/lib/storage";
 import { loadCloudOptOut, saveCloudOptOut } from "@/lib/syncPrefs";
-import type { AppState, ClassData, PlanTask, Tweaks, ViewMode } from "@/lib/types";
+import { classCurrent, classProjected } from "@/lib/classMath";
+import type { AppState, ClassData, PlanTask, ProgressSnapshot, Tweaks, ViewMode } from "@/lib/types";
 import { useConvexAuth, useMutation, useQuery } from "convex/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -28,6 +29,7 @@ export function usePlannerState(isSignedIn: boolean) {
   const [view, setView] = useState<ViewMode>("class");
   const [tweaks, setTweaks] = useState<Tweaks>(DEFAULT_TWEAKS);
   const [tasks, setTasks] = useState<PlanTask[]>([]);
+  const [progress, setProgress] = useState<ProgressSnapshot[]>([]);
   const [hydrated, setHydrated] = useState(false);
 
   const [syncStatus, setSyncStatus] = useState<SyncStatus>("off");
@@ -49,14 +51,15 @@ export function usePlannerState(isSignedIn: boolean) {
     setActiveId(snapshot.activeId ?? snapshot.classes[0]?.id ?? null);
     setView(snapshot.view ?? "class");
     setTasks(snapshot.tasks ?? []);
+    setProgress(snapshot.progress ?? []);
     if (snapshot.tweaks && snapshot.version === STATE_VERSION) {
       setTweaks((t) => ({ ...t, ...snapshot.tweaks }));
     }
   }, []);
 
   const getSnapshot = useCallback(
-    (): AppState => buildAppState(classes, activeId, view, tweaks, tasks),
-    [classes, activeId, view, tweaks, tasks],
+    (): AppState => buildAppState(classes, activeId, view, tweaks, tasks, progress),
+    [classes, activeId, view, tweaks, tasks, progress],
   );
 
   // Load preferences (client only).
@@ -72,6 +75,21 @@ export function usePlannerState(isSignedIn: boolean) {
     if (local) applySnapshot(local);
     setHydrated(true);
   }, [hydrated, applySnapshot]);
+
+  useEffect(() => {
+    if (!hydrated || classes.length === 0) return;
+    const date = new Date().toISOString().slice(0, 10);
+    setProgress((previous) => {
+      const withoutToday = previous.filter((point) => point.date !== date);
+      const today = classes.map((cls) => ({
+        date,
+        classId: cls.id,
+        current: classCurrent(cls),
+        projected: classProjected(cls),
+      }));
+      return [...withoutToday, ...today].slice(-180);
+    });
+  }, [classes, hydrated]);
 
   // Reset remote-applied flag when cloud becomes inactive (sign out, opt out).
   useEffect(() => {
@@ -138,7 +156,7 @@ export function usePlannerState(isSignedIn: boolean) {
   useEffect(() => {
     if (!hydrated) return;
     saveLocalState(getSnapshot());
-  }, [classes, activeId, view, tweaks, tasks, hydrated, getSnapshot]);
+  }, [classes, activeId, view, tweaks, tasks, progress, hydrated, getSnapshot]);
 
   // Debounced cloud save once first sync is done.
   useEffect(() => {
@@ -164,7 +182,7 @@ export function usePlannerState(isSignedIn: boolean) {
     return () => {
       if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
     };
-  }, [classes, activeId, view, tweaks, hydrated, cloudActive, remoteApplied, getSnapshot, saveRemote]);
+  }, [classes, activeId, view, tweaks, tasks, progress, hydrated, cloudActive, remoteApplied, getSnapshot, saveRemote]);
 
   const retrySync = useCallback(() => {
     if (!cloudActive) return;
@@ -207,6 +225,7 @@ export function usePlannerState(isSignedIn: boolean) {
     setClasses([]);
     setActiveId(null);
     setTasks([]);
+    setProgress([]);
     clearLocalState();
     if (cloudActive) {
       try {
@@ -229,6 +248,7 @@ export function usePlannerState(isSignedIn: boolean) {
     setTweaks,
     tasks,
     setTasks,
+    progress,
     hydrated: hydrated && prefsLoaded,
     cloudActive,
     cloudOptOut,

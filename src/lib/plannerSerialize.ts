@@ -16,8 +16,9 @@ export function parseAppStateJson(json: string): AppState | null {
       version,
       classes: parsed.classes,
       activeId: typeof parsed.activeId === "string" ? parsed.activeId : null,
-      view: parsed.view === "semester" ? "semester" : "class",
-      tasks: Array.isArray(parsed.tasks) ? parsed.tasks : [],
+      view: parsed.view === "today" || parsed.view === "semester" ? parsed.view : "class",
+      tasks: Array.isArray(parsed.tasks) ? parsed.tasks.map((task) => ({ ...task, effort: task.effort ?? 30 })) : [],
+      progress: Array.isArray(parsed.progress) ? parsed.progress : [],
       tweaks:
         parsed.tweaks && version === STATE_VERSION
           ? { ...DEFAULT_TWEAKS, ...parsed.tweaks }
@@ -34,6 +35,7 @@ export function buildAppState(
   view: AppState["view"],
   tweaks: AppState["tweaks"],
   tasks: AppState["tasks"],
+  progress: AppState["progress"],
 ): AppState {
-  return { version: STATE_VERSION, classes, activeId, view, tweaks, tasks };
+  return { version: STATE_VERSION, classes, activeId, view, tweaks, tasks, progress };
 }
