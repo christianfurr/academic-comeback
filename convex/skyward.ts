@@ -150,6 +150,15 @@ export const clearCredentials = action({
 
 const CONCURRENCY = 4;
 
+function isKphsClassName(name: string): boolean {
+  return /^kphs\//i.test(name.trim());
+}
+
+function displayClassName(name: string): string {
+  const match = name.match(/^kphs\/\s*([^()]+?)(?:\s*\([^)]*\))?\s*$/i);
+  return match?.[1]?.trim() || name;
+}
+
 async function mapWithConcurrency<T, R>(
   items: T[],
   limit: number,
@@ -258,7 +267,12 @@ export const syncFromSkyward = action({
     await mapWithConcurrency(filteredClasses, CONCURRENCY, async (cls) => {
       // If a term was requested, only pull classes that *have* a grade row for that
       // term. Otherwise fall back to each class's latest non-empty term.
-      const term = args.term ? resolveTerm(cls, args.term) : currentTermFor(cls);
+      // KPHS classes are online-course records and may only expose their active Q1
+      // grade while the shared picker is already on Q4. Keep those courses visible
+      // by falling back to their latest graded term instead of dropping them.
+      const term = args.term
+        ? resolveTerm(cls, args.term) ?? (isKphsClassName(cls.name) ? currentTermFor(cls) : null)
+        : currentTermFor(cls);
       if (!term) return; // skip — class isn't enrolled in this term
       // If the requested term has no letter, the class hasn't been graded there;
       // treat that as "not enrolled this term" and skip rather than pulling stale assignments.
@@ -266,20 +280,21 @@ export const syncFromSkyward = action({
       try {
         const result = await client.getAssignmentsForClass(cls, term.term);
         const categories: ParsedCategory[] = result.categories;
-        courses.push({ name: cls.name, categories });
+        const name = displayClassName(cls.name);
+        courses.push({ name, categories });
         classMeta.push({
-          name: cls.name,
+          name,
           currentTerm: term.term,
           letter: result.termLetter ?? term.letter,
           percent: result.termPercent,
         });
       } catch (e: unknown) {
         errors.push({
-          className: cls.name,
+          className: displayClassName(cls.name),
           message: e instanceof Error ? e.message : String(e),
         });
         classMeta.push({
-          name: cls.name,
+          name: displayClassName(cls.name),
           currentTerm: term.term,
           letter: term.letter,
           percent: null,
